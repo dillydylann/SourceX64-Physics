@@ -5,7 +5,7 @@
 #if defined(IVP_NO_DOUBLE) && !defined(SUN)
 #	include <math.h>
 
-#   if defined(WIN32) || defined(PSXII) || defined(LINUX)
+#   if defined(WIN32) || defined(PSXII) || defined(POSIX)
     union p_float_ieee {	    IVP_FLOAT val;
 	    struct {
 		    unsigned int valh:23;   unsigned int exp:8;   unsigned int signum:1;
@@ -19,7 +19,7 @@
     #define IVP_EXP_FOR_ONE 0x7f
     inline int PFM_LD(float a){ return ((p_float_ieee *)&(a))->ln.exp - IVP_EXP_FOR_ONE; };
 #else
-#	if defined(LINUX) || defined(WIN32) || defined(OSX)
+#	if defined(POSIX) || defined(WIN32)
 
 union p_double_ieee {
 	IVP_DOUBLE val;

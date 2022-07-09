@@ -260,8 +260,8 @@ void hk_Local_Constraint_System::apply_effector_PSI(hk_PSI_Info& pi, hk_Array<hk
 {
 	const int buffer_size = 150000;
 	const int max_constraints = 1000;
-	void* vmq_buffers[max_constraints];
-	char buffer[buffer_size];
+	void** vmq_buffers = new void*[max_constraints];
+	char* buffer = new char[buffer_size];
 	HK_ASSERT(m_size_of_all_vmq_storages < buffer_size);
 
 	hk_real taus[] = { 1.0f, 1.0f, 0.8f, 0.6f, 0.4f, 0.4f, 0.4f, 0.4f, 0.4f, 0.0f };
@@ -350,6 +350,9 @@ void hk_Local_Constraint_System::apply_effector_PSI(hk_PSI_Info& pi, hk_Array<hk
 
 		m_penetrationCount = 0;
 	}*/
+
+	delete[] buffer;
+	delete[] vmq_buffers;
 }
 
 hk_real hk_Local_Constraint_System::get_epsilon()

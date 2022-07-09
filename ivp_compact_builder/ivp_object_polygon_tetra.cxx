@@ -565,7 +565,7 @@ IVP_ERROR_STRING P_Sur_2D::calc_line_representation()
     
 #ifdef SUR_DEBUG    
     printf("\n\n\n***********************\n"
-	   "POP: %d, SURFACE_NUM %d with %d points\n\n", (int)pop, sur->get_surface_index(),
+	   "POP: %p, SURFACE_NUM %d with %d points\n\n", pop, sur->get_surface_index(),
 	   sur->n_lines);
 #endif    
     // 3d->2d trafo: skip koord with greatest ohesse extent

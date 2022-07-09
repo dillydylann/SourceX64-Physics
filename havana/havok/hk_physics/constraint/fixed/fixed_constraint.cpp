@@ -18,9 +18,7 @@
 #include <hk_math/dense_vector.h>
 
 /* Local class */
-#ifdef HK_ARCH_PPC
 #include <stddef.h> // for size_t
-#endif
 
 // IVP_EXPORT_PUBLIC
 
@@ -28,14 +26,10 @@ class hk_Fixed_Work
 {
 	public:
 
-#ifdef HK_ARCH_PPC
 		static inline void *operator new (size_t size, void *addr){
 			return addr;
 		}
-#else
-		static inline void *operator new (size_t size, void *addr){
-			return addr;
-		}
+#ifndef HK_ARCH_PPC
 		static inline void operator delete (void *, void *){ }
 #endif
 		hk_Fixed_Dense_Vector<6> m_correction;

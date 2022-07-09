@@ -8,13 +8,6 @@
 
 #include <ctype.h>
 
-#if !defined(__MWERKS__) || !defined(__POWERPC__)
-#ifdef OSX
-#include <malloc/malloc.h>
-#else
-#include <malloc.h>
-#endif
-#endif
 #ifdef WIN32
 #	ifndef _XBOX
 #		ifndef WIN32_LEAN_AND_MEAN

@@ -3,14 +3,6 @@
 #include <ivp_physics.hxx>
 #include <stdlib.h>
 
-#if !defined(__MWERKS__) || !defined(__POWERPC__)
-#ifdef OSX
-#include <malloc/malloc.h>
-#else
-#include <malloc.h>
-#endif
-#endif
-
 #ifndef WIN32
 #	pragma implementation "ivu_memory.hxx"
 #endif
@@ -231,7 +223,7 @@ void *IVP_U_Memory::get_memc(unsigned int groesse)
 {
 //	if (groesse & 0x7) *(int *)0 = 0;
     void *neubeginn=get_mem(groesse);
-    register long *z=(long*)neubeginn;
+    register intp *z=(intp*)neubeginn;
     memset((char *)z,0,groesse);
     return(neubeginn);
 }

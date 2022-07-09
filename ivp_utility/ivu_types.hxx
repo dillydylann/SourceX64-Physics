@@ -5,7 +5,7 @@
 #ifndef _IVP_U_TYPES_INCLUDED
 #define _IVP_U_TYPES_INCLUDED
 
-#ifdef _LINUX
+#ifdef POSIX
 	#include <signal.h>
 #endif
 
@@ -49,8 +49,13 @@
        Exactly DEBUG or NDEBUG has to be defined, check Makefile
 #endif
 
+#if defined(WIN32)
+#define CORE __debugbreak()
+#elif defined(POSIX)
+#define CORE raise(SIGINT)
+#else
 #define CORE *(int *)0 = 0  /* send fatal signal */
-
+#endif
 #if defined (PSXII)
 #	if defined (__MWERKS__)
 inline void BREAKPOINT()
@@ -105,7 +110,7 @@ inline void BREAKPOINT()
 		 			DebugStr((unsigned char *)error); \
 			} \
 		}
-#	elif defined (_LINUX)
+#	elif defined (POSIX)
 #		define IVP_ASSERT(cond) \
 		{ \
 			if(!(cond)) \
@@ -228,16 +233,8 @@ enum IVP_RETURN_TYPE {
 
 #define IVP_CDECL       /* set this to whatever you need to satisfy your linker */
 
-#if !defined(__MWERKS__) || !defined(__POWERPC__)
-#   ifdef OSX
-#       include <malloc/malloc.h>
-#   else
-#       include <malloc.h>
-#   endif
-#endif
-
+#include <stdlib.h>
 #include <string.h>
-
 
 	char * IVP_CDECL p_calloc(int nelem,int size);
 	void * IVP_CDECL p_realloc(void* memblock, int size);

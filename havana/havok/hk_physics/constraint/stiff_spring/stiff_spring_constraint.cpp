@@ -15,15 +15,10 @@
 class hk_Stiff_Spring_Work
 {
 	public:
-#ifdef HK_ARCH_PPC
 		static inline void *operator new (size_t size, void *addr){
 			return addr;
 		}
-#else
-		static inline void *operator new (size_t size, void *addr){
-			return addr;
-		}
-
+#ifndef HK_ARCH_PPC
 		static inline void operator delete (void *, void *){;}
 #endif
 

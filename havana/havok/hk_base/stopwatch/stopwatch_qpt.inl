@@ -1,31 +1,8 @@
 
-#if defined(HK_HAVE_MSVC_INLINE_ASSEMBLY)
-
 inline void hk_query_performance_timer(hk_uint64* ticks)
 {
-	__asm {
-		mov edi, ticks
-		rdtsc
-		mov [edi  ], eax
-		mov [edi+4], edx
-	}
+	*ticks = __rdtsc();
 }
-
-#elif defined(HK_HAVE_GNU_INLINE_ASSEMBLY)
-
-inline void hk_query_performance_timer(hk_uint64* ticks)
-{
-	__asm__ __volatile__ (	"rdtsc\n\t"
-							"movl %%eax,  (%0)\n\t"
-							"movl %%edx, 4(%0)\n\t"
-								: /* no output regs */
-								: "D" (ticks)
-								: "%eax", "%edx");
-}
-
-#else
-#	error HK_HAVE_QUERY_PERFORMANCE_TIMER is defined, but no implementation.
-#endif
 
 inline void hk_query_performance_timer_frequency(hk_uint64* freq)
 {

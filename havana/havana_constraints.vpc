@@ -197,8 +197,6 @@ $Project "havana_constraints"
 
 	$Folder	"hk_physics (ipion)"
 	{
-		$File	"$SRCDIR\ivp\ivp_physics\hk_physics\physics.h"
-
 		$Folder	"simunit"
 		{
 			$File	"$SRCDIR\ivp\ivp_physics\hk_physics\simunit\psi_info.h"

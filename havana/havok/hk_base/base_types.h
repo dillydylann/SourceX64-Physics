@@ -1,7 +1,7 @@
 #ifndef HK_BASE_BASE_TYPES_H
 #define HK_BASE_BASE_TYPES_H
 
-#ifdef _LINUX
+#ifdef POSIX
 #include <signal.h>
 #endif
 
@@ -35,7 +35,9 @@
 
 #define HK_DECLARE_NONVIRTUAL_CLASS_ALLOCATOR(a,b)
 
-#ifdef _LINUX
+#if defined(WIN32)
+#define HK_BREAKPOINT() __debugbreak()
+#elif defined(POSIX)
 #define HK_BREAKPOINT() raise(SIGINT)
 #else
 #define HK_BREAKPOINT() *(int*)0=0
@@ -66,14 +68,21 @@ typedef unsigned char		hk_uchar;
 typedef unsigned short		hk_uint16;
 typedef unsigned int		hk_uint32;
 
-#if 1 // defined(__POWERPC__) && defined(__MWERKS__)
 #include <stddef.h>
+#include <stdint.h>
 typedef size_t 			hk_size_t;  // CK: unsigned long int ..
+
+#ifdef PLATFORM_64BITS
+typedef long long			intp;
+typedef unsigned long long	uintp;
 #else
-typedef unsigned int 	hk_size_t;
+typedef int					intp;
+typedef unsigned int		uintp;
 #endif
 
-#ifdef _LINUX
+#if defined(WIN32)
+#define HK_BREAK __debugbreak()
+#elif defined(POSIX)
 #define HK_BREAK raise(SIGINT)
 #else
 #define HK_BREAK (*((int *)0)) = 0
@@ -83,12 +92,12 @@ typedef unsigned int 	hk_size_t;
 
 #if defined(__GNUC__)
 #	define HK_HAVE_PRAGMA_INTERFACE
-#	define HK_HAVE_GNU_INLINE_ASSEMBLY
+#	include <x86intrin.h>
 	typedef signed long long	hk_int64;
 	typedef unsigned long long	hk_uint64;
 #elif defined(WIN32)
 #	define HK_HAVE_FORCE_INLINE
-#	define HK_HAVE_MSVC_INLINE_ASSEMBLY
+#	include <intrin.h>
 	typedef signed __int64		hk_int64;
 	typedef unsigned __int64	hk_uint64;
 #endif

@@ -7,22 +7,15 @@
 #include <hk_physics/constraint/pulley/pulley_bp.h>
 #include <hk_physics/constraint/pulley/pulley_constraint.h>
 
-#ifdef HK_ARCH_PPC
 #include <stddef.h> // for size_t
-#endif
 
 class hk_Pulley_Work
 {
 	public:
-#ifdef HK_ARCH_PPC
 		static inline void *operator new (size_t size, void *addr){
 			return addr;
 		}
-#else
-		static inline void *operator new (size_t size, void *addr){
-			return addr;
-		}
-
+#ifndef HK_ARCH_PPC
 		static inline void operator delete (void *, void *){;}
 #endif
 

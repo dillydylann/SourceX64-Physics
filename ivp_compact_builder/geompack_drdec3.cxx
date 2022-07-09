@@ -4,11 +4,7 @@
 #include <ivp_physics.hxx>
 
 #if !( (defined(__MWERKS__) && defined(__POWERPC__)) || defined(GEKKO) )
-#ifdef OSX
-#include <malloc/malloc.h>
-#else
-#include <malloc.h>
-#endif
+#include <stdlib.h>
 #endif
 
 #include <ivp_betterdebugmanager.hxx>

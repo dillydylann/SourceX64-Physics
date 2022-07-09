@@ -1306,7 +1306,7 @@ void IVP_SurfaceBuilder_Ledge_Soup::insert_compact_ledges(){
        	    IVV_Sphere *sphere = this->terminal_spheres.element_at(i);
 	    IVP_Compact_Ledge *source = sphere->compact_ledge;
 
-	    IVP_ASSERT((long(dest) & 0xf) == 0);
+	    IVP_ASSERT((intp(dest) & 0xf) == 0);
 
 	    sphere->compact_ledge = (IVP_Compact_Ledge *)dest;	    
 	    int ledge_size = recompile_point_indizes_of_compact_ledge(source,dest);
@@ -1321,7 +1321,7 @@ void IVP_SurfaceBuilder_Ledge_Soup::insert_compact_ledges(){
        	IVV_Sphere *sphere = this->rec_spheres.element_at(j);
 	IVP_Compact_Ledge *source = sphere->compact_ledge;
 
-	IVP_ASSERT((long(dest) & 0xf) == 0);
+	IVP_ASSERT((intp(dest) & 0xf) == 0);
 
 	sphere->compact_ledge = (IVP_Compact_Ledge *)dest;
 	
@@ -1434,11 +1434,11 @@ void IVP_SurfaceBuilder_Ledge_Soup::ledgetree_array_debug_output() {
     int i;
     for (i=0; i<this->number_of_nodes; i++) {
 	node = &nodes[i];
-	printf("Node %d (address: 0x%x / %d)\n", i, (int)(intp)node, (int)(intp)node);
+	printf("Node %d (address: %p)\n", i, node);
 	//node->center.print("     center ");
 	printf("        radius %.6f)\n", node->radius);
-	printf("         left branch offset: %d (address: 0x%x / %d)\n", sizeof(*node), (int)(intp)(node+1), (int)(intp)(node+1));
-	printf("        right branch offset: %d (address: 0x%x / %d)\n", node->offset_right_node, (int)(intp)node+node->offset_right_node, (int)(intp)node+node->offset_right_node);
+	printf("         left branch offset: %d (address: %p)\n", (int)sizeof(*node), (node+1));
+	printf("        right branch offset: %d (address: %p)\n", node->offset_right_node, node+node->offset_right_node);
 	printf("\n");
     }
     // *** debugging END ********************************************************
