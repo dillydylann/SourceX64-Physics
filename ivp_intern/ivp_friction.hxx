@@ -20,6 +20,7 @@ class IV_U_Point_PCore;
 class IVP_Environment;
 class IVP_Cache_Ledge_Point;
 class IVP_Compact_Edge;
+class IVP_Mindist;
 
 #define IVP_SLOWLY_TURN_ON_KEEPER 20
 
