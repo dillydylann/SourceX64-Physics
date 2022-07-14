@@ -46,7 +46,15 @@ public:
     IVP_U_MINLIST_INDEX add(void *elem,IVP_U_MINLIST_FIXED_POINT value); // returns an index
     
     void *find_min_elem(){
-		IVP_ASSERT( first_element != IVP_U_MINLIST_UNUSED);
+		if ( first_element == IVP_U_MINLIST_UNUSED )
+		{
+			// HACK: first_element has a bogus value
+			// Return the first element if there is only one in here
+			if ( counter == 1 )
+				return elems[0].element;
+
+			return nullptr;
+		}
 		return elems[first_element].element;
 	};
 

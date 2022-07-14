@@ -139,6 +139,12 @@ void IVP_Mindist_Recursive::exact_mindist_went_invalid(IVP_Mindist_Manager *mm){
     }else{
 	const IVP_Compact_Ledgetree_Node *n0 = l0->get_ledgetree_node();
 	const IVP_Compact_Ledgetree_Node *n1 = l1->get_ledgetree_node();
+#ifdef PLATFORM_64BITS
+	// HACK HACK!!! Sometimes n1 gets screwed up :(
+	if ( !n1 || ((uintp)n1 == 0x100000000) )
+		recursive_status = IVP_MR_FIRST_SYNAPSE_RECURSIVE;
+	else
+#endif
 	if ( n0->radius > n1->radius){
 	    recursive_status = IVP_MR_FIRST_SYNAPSE_RECURSIVE;
 	}else{
