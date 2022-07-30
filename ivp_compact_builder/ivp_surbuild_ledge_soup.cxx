@@ -1434,11 +1434,11 @@ void IVP_SurfaceBuilder_Ledge_Soup::ledgetree_array_debug_output() {
     int i;
     for (i=0; i<this->number_of_nodes; i++) {
 	node = &nodes[i];
-	printf("Node %d (address: %p)\n", i, node);
+	printf("Node %d (address: 0x%zx / %zd)\n", i, (size_t)node, (size_t)node);
 	//node->center.print("     center ");
 	printf("        radius %.6f)\n", node->radius);
-	printf("         left branch offset: %d (address: %p)\n", (int)sizeof(*node), (node+1));
-	printf("        right branch offset: %d (address: %p)\n", node->offset_right_node, node+node->offset_right_node);
+	printf("         left branch offset: %zd (address: 0x%zx / %zd)\n", sizeof(*node), (size_t)(node+1), (size_t)(node+1));
+	printf("        right branch offset: %zd (address: 0x%zx / %zd)\n", (size_t)node->offset_right_node, (size_t)node+node->offset_right_node, (size_t)node+node->offset_right_node);
 	printf("\n");
     }
     // *** debugging END ********************************************************
