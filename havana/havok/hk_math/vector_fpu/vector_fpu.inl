@@ -1,3 +1,4 @@
+#include "ivu_types.hxx"
 
 inline void hk_VecFPU::fpu_add_multiple_row(hk_real *target_adress,hk_real *source_adress,hk_real factor,int size,hk_bool adress_aligned) {
     if(adress_aligned==HK_FALSE) {
