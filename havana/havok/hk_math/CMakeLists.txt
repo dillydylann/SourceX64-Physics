@@ -1,17 +1,12 @@
-# CMake script for the hk_math library
-
 cmake_minimum_required(VERSION 3.16)
 project(hk_math)
 
 set(SRCDIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../..")
 set(CMAKE_MODULE_PATH "${SRCDIR}/cmake")
 
-include(platform_dirs)
-set(OUTLIBDIR "${LIBCOMMON}")
-
 include(source_lib_base)
 
-include_directories("${SRCDIR}/ivp/havana/havok" "${SRCDIR}/ivp/havana")
+include_directories("${SRCDIR}/ivp/havana/havok" "${SRCDIR}/ivp/havana" "${SRCDIR}/ivp/ivp_utility")
 add_compile_definitions(VPHYSICS_EXPORTS HAVANA_CONSTRAINTS HAVOK_MOPP)
 
 

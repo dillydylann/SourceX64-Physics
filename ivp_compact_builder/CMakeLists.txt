@@ -1,13 +1,8 @@
-# CMake script for the ivp_compactbuilder library
-
 cmake_minimum_required(VERSION 3.16)
 project(ivp_compactbuilder)
 
 set(SRCDIR "${CMAKE_CURRENT_SOURCE_DIR}/../..")
 set(CMAKE_MODULE_PATH "${SRCDIR}/cmake")
-
-include(platform_dirs)
-set(OUTLIBDIR "${LIBCOMMON}")
 
 include(source_lib_base)
 
